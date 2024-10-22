@@ -1,0 +1,48 @@
+<h2>Registro de Usuario</h2>
+
+<form action="/Account/Registro" method="post" onsubmit="return validarContraseña()">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="Nombre" required />
+
+    <label for="apellido">Apellido:</label>
+    <input type="text" name="Apellido" required />
+
+    <label for="nombreUsuario">Nombre de Usuario:</label>
+    <input type="text" name="NombreUsuario" required />
+
+    <label for="email">Email:</label>
+    <input type="email" name="Gmail" required />
+
+    <label for="contraseña">Contraseña:</label>
+    <input type="password" name="Contraseña" id="contraseña" required />
+
+    <label for="confirmarContraseña">Confirmar Contraseña:</label>
+    <input type="password" name="confirmarContraseña" id="confirmarContraseña" required />
+
+    <input type="submit" value="Registrar" />
+</form>
+
+<script>
+    function validarContraseña() {
+        var contraseña = document.getElementById("contraseña").value;
+        var confirmarContraseña = document.getElementById("confirmarContraseña").value;
+
+        var regex = /^(?=.*[A-Z])(?=.*[!@#$&*]).{8,}$/;
+        if (!regex.test(contraseña)) {
+            alert("La contraseña debe tener al menos un carácter especial, una letra mayúscula y 8 caracteres");
+            return false;
+        }
+
+        if (contraseña !== confirmarContraseña) {
+            alert("Las contraseñas no coinciden");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+@if (!String.IsNullOrEmpty(ViewBag.Error))
+{
+    <p style="color:red;">@ViewBag.Error</p>
+}
